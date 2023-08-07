@@ -27,6 +27,9 @@
 1. Access a shell prompt and issue commands with correct syntax
 
     * Common commands and their options, as well as vim usage, are shown below:
+	* To add:
+		* Time: gives the time it takes to run the following command
+
         | Command        | Options                                                                                                                                                          | Description                                     |
         |----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------|
         | ls             | -h (human readable) <br>  -a (show hidden) <br> -l (detailed) <br> -lt (newist file first) <br> -ltr (oldest file first)                                         | List of files and directories                   |
@@ -89,7 +92,18 @@
         | p                        | Paste copied text after cursor  |
     
 1. Use input-output redirection (>, >>, |, 2>, etc.)
-    * The default locations for input, output, and error are referred to as standard input (stdin), standard output (stdout), and standard error (stderr).
+	* essentially change the output/input from monitor/keyboard
+
+    * The default locations for input, output, and error are referred to as standard input (stdin), standard output (stdout), and standard error (stderr). 
+		* These are known as streams and streams are treated like files (like almost everything on linux)
+		* The file descriptors for the streams are:
+			* file descriptor 0: stdin -> default is keyboard
+			* file descriptor 1: stdout -> default is monitor
+			* file descriptor 2: stderr
+		* Redirection symbols:
+			* < or 0<
+			* > or 1>
+			* 2>
     
     * Standard input redirection can be done to have a command read the required information from an alternative source, such as a file, instead of the keyboard. For example:
         ```shell
@@ -108,10 +122,29 @@
 
     * Instead of > to create or overwrite, >> can be used to append to a file.
 
-    * To redirect both stdout and stderror to a file:
+    * To redirect both stdout and stderror to the same file:
         ```shell
         echo test >> result.txt 2>&1
         ```
+
+	* This command will direct stdout to a file called capture.txt and stderr to a file called error.txt:
+		```shell
+		/error.sh 1> capture.txt 2> error.txt
+		```
+1. Basic Linux Stuff
+	* Everything in linux is a file
+		* hardware can be accessed via device files in /dev
+		* streams are files
+		* network sockets are files
+	* Pipes
+		* redirect output of one command to another command
+	* History: gives command history
+		* cntr + r
+		* -c clears current history, -w clears ALL history(can also delete ~/.bash_profile)
+		* located in ~/.bash_history (all commands kept in memory until shell closed then history is written)
+	* Bash cmpletion
+		* Can hit tab twice on incomplete commands or filenames and cli will autocmplete ghe command or file
+	
 
 1. Use grep and regular expressions to analyse text
     * The grep command is used to find text. For example:
